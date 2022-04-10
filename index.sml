@@ -18,6 +18,25 @@ fun is_older(a: date, b: date) =
   
   false;
 
+fun is_older_test() =
+  if is_older((1, 1, 1), (2, 1, 1)) <> true
+  then raise Fail "Test failed at 1 case."
+  else
+
+  if is_older((1, 1, 1), (1, 2, 1)) <> true
+  then raise Fail "Test failed at 2 case."
+  else
+
+  if is_older((1, 1, 1), (1, 1, 2)) <> true
+  then raise Fail "Test failed at 3 case."
+  else
+  
+  if is_older((1, 1, 1), (1, 1, 1)) <> false
+  then raise Fail "Test failed at 4 case."
+  else
+
+  print("Test of is_older passed.");
+
 
 (* Helper *)
 fun is_date_in_month(date: date, month: int) =
@@ -33,6 +52,21 @@ fun number_in_month(dates: date list, month: int) =
   if is_date_in_month((hd dates), month)
   then 1 + number_in_month(tl dates, month)
   else number_in_month(tl dates, month);
+
+fun number_in_month_test() =
+  if number_in_month([(1, 1, 1), (2, 1, 1)], 1) <> 2
+  then raise Fail "Test failed at 1 case."
+  else
+
+  if number_in_month([], 1) <> 0
+  then raise Fail "Test failed at 2 case."
+  else
+
+  if number_in_month([(1, 2, 1)], 1) <> 0
+  then raise Fail "Test failed at 3 case."
+  else
+
+  print("Test of number_in_month passed.");
 
 
 (* Helper *)
@@ -54,6 +88,25 @@ fun number_in_months(dates: date list, months: int list) =
   then 1 + number_in_months(tl dates, months)
   else number_in_months(tl dates, months);
 
+fun number_in_months_test() =
+  if number_in_months([(1, 1, 1), (1, 2, 1)], [1, 2]) <> 2
+  then raise Fail "Test failed at 1 case."
+  else
+
+  if number_in_months([(1, 1, 1), (1, 2, 1)], [3, 4]) <> 0
+  then raise Fail "Test failed at 2 case."
+  else
+
+  if number_in_months([], [1]) <> 0
+  then raise Fail "Test failed at 3 case."
+  else
+
+  if number_in_months([(1, 2, 1)], [1]) <> 0
+  then raise Fail "Test failed at 4 case."
+  else
+
+  print("Test of number_in_months passed.");
+
 
 fun dates_in_month(dates: date list, month: int) =
   if null dates
@@ -63,6 +116,21 @@ fun dates_in_month(dates: date list, month: int) =
   if #2 (hd dates) = month
   then (hd dates) :: dates_in_month(tl dates, month)
   else dates_in_month(tl dates, month);
+
+fun dates_in_month_test() =
+  if dates_in_month([(1, 1, 1), (2, 1, 1)], 1) <> [(1, 1, 1), (2, 1, 1)]
+  then raise Fail "Test failed at 1 case."
+  else
+
+  if dates_in_month([(1, 2, 1), (2, 2, 1)], 1) <> []
+  then raise Fail "Test failed at 2 case."
+  else
+
+  if dates_in_month([(1, 1, 1), (1, 2, 1)], 1) <> [(1, 1, 1)]
+  then raise Fail "Test failed at 3 case."
+  else
+
+  print("Test of dates_in_month passed.");
 
 
 fun dates_in_months(dates: date list, months: int list) =
@@ -74,11 +142,37 @@ fun dates_in_months(dates: date list, months: int list) =
   then (hd dates) :: dates_in_months(tl dates, months)
   else dates_in_months(tl dates, months);
 
+fun dates_in_months_test() =
+  if dates_in_months([(1, 1, 1), (1, 2, 1)], [1, 2]) <> [(1, 1, 1), (1, 2, 1)]
+  then raise Fail "Test failed at 1 case."
+  else
+
+  if dates_in_months([(1, 1, 1), (1, 2, 1)], [3]) <> []
+  then raise Fail "Test failed at 2 case."
+  else
+
+  if dates_in_months([], [1]) <> []
+  then raise Fail "Test failed at 3 case."
+  else
+
+  print("Test of dates_in_months passed.");
+
 
 fun get_nth(list: 'a list, n: int) =
   if n = 1
   then hd list
   else get_nth(tl list, n - 1);
+
+fun get_nth_test() =
+  if get_nth([1, 2, 3], 1) <> 1
+  then raise Fail "Test failed at 1 case."
+  else 
+
+  if get_nth([1, 2, 3], 2) <> 2
+  then raise Fail "Test failed at 2 case."
+  else
+
+  print("Test of get_nth passed.");
 
 
 (* Helper *)
@@ -105,6 +199,17 @@ fun month_to_string(month: int) =
 fun date_to_string(date: date) = 
   month_to_string(#2 date) ^ " " ^ Int.toString(#3 date) ^ ", " ^ Int.toString(#1 date);
 
+fun date_to_string_test() =
+  if date_to_string((1, 1, 1)) <> "January 1, 1"
+  then raise Fail "Test failed at 1 case."
+  else 
+
+  if date_to_string((2, 2, 2)) <> "February 2, 2"
+  then raise Fail "Test failed at 2 case."
+  else
+
+  print("Test of date_to_string passed.");
+
 
 fun number_before_reaching_sum(numbers: int list, sum: int) =
   if null numbers
@@ -114,6 +219,25 @@ fun number_before_reaching_sum(numbers: int list, sum: int) =
   if (hd numbers) < sum
   then 1 + number_before_reaching_sum(tl numbers, sum - (hd numbers))
   else 0;
+
+fun number_before_reaching_sum_test() =
+  if number_before_reaching_sum([1, 2, 3], 1) <> 0
+  then raise Fail "Test failed at 1 case."
+  else 
+
+  if number_before_reaching_sum([1, 2, 3], 2) <> 1
+  then raise Fail "Test failed at 2 case."
+  else
+
+  if number_before_reaching_sum([1, 2, 3], 3) <> 1
+  then raise Fail "Test failed at 3 case."
+  else
+
+  if number_before_reaching_sum([1, 2, 3], 4) <> 2
+  then raise Fail "Test failed at 4 case."
+  else
+
+  print("Test of number_before_reaching_sum passed.");
 
 
 fun what_month(day: int) =
@@ -136,176 +260,6 @@ fun what_month(day: int) =
     number_before_reaching_sum(months, day) + 1
   end;
 
-
-(* Helper *)
-fun numbers_range(min: int, max: int) =
-  if min <= max
-  then min :: numbers_range(min + 1, max)
-  else [];
-
-fun months_range(a: int, b: int) =
-  if a > b
-  then []
-  else numbers_range(
-    what_month(a),
-    what_month(b)
-  );
-
-
-(* Helper *)
-fun oldest_search(dates: date list, oldest_date: date) =
-  if null dates 
-  then oldest_date
-  else
-
-  if is_older(oldest_date, hd dates)
-  then oldest_search(tl dates, oldest_date)
-  else oldest_search(tl dates, hd dates)
-
-fun oldest(dates: date list) =
-  if null dates
-  then NONE
-  else
-
-  SOME(
-    oldest_search(tl dates, hd dates)
-  )
-
-
-
-
-fun is_older_test() =
-  if is_older((1, 1, 1), (2, 1, 1)) <> true
-  then raise Fail "Test failed at 1 case."
-  else
-
-  if is_older((1, 1, 1), (1, 2, 1)) <> true
-  then raise Fail "Test failed at 2 case."
-  else
-
-  if is_older((1, 1, 1), (1, 1, 2)) <> true
-  then raise Fail "Test failed at 3 case."
-  else
-  
-  if is_older((1, 1, 1), (1, 1, 1)) <> false
-  then raise Fail "Test failed at 4 case."
-  else
-
-  print("Test of is_older passed.");
-
-
-fun number_in_month_test() =
-  if number_in_month([(1, 1, 1), (2, 1, 1)], 1) <> 2
-  then raise Fail "Test failed at 1 case."
-  else
-
-  if number_in_month([], 1) <> 0
-  then raise Fail "Test failed at 2 case."
-  else
-
-  if number_in_month([(1, 2, 1)], 1) <> 0
-  then raise Fail "Test failed at 3 case."
-  else
-
-  print("Test of number_in_month passed.");
-
-
-fun number_in_months_test() =
-  if number_in_months([(1, 1, 1), (1, 2, 1)], [1, 2]) <> 2
-  then raise Fail "Test failed at 1 case."
-  else
-
-  if number_in_months([(1, 1, 1), (1, 2, 1)], [3, 4]) <> 0
-  then raise Fail "Test failed at 2 case."
-  else
-
-  if number_in_months([], [1]) <> 0
-  then raise Fail "Test failed at 3 case."
-  else
-
-  if number_in_months([(1, 2, 1)], [1]) <> 0
-  then raise Fail "Test failed at 4 case."
-  else
-
-  print("Test of number_in_months passed.");
-
-
-fun dates_in_month_test() =
-  if dates_in_month([(1, 1, 1), (2, 1, 1)], 1) <> [(1, 1, 1), (2, 1, 1)]
-  then raise Fail "Test failed at 1 case."
-  else
-
-  if dates_in_month([(1, 2, 1), (2, 2, 1)], 1) <> []
-  then raise Fail "Test failed at 2 case."
-  else
-
-   if dates_in_month([(1, 1, 1), (1, 2, 1)], 1) <> [(1, 1, 1)]
-  then raise Fail "Test failed at 3 case."
-  else
-
-  print("Test of dates_in_month passed.");
-
-
-fun dates_in_months_test() =
-  if dates_in_months([(1, 1, 1), (1, 2, 1)], [1, 2]) <> [(1, 1, 1), (1, 2, 1)]
-  then raise Fail "Test failed at 1 case."
-  else
-
-  if dates_in_months([(1, 1, 1), (1, 2, 1)], [3]) <> []
-  then raise Fail "Test failed at 2 case."
-  else
-
-  if dates_in_months([], [1]) <> []
-  then raise Fail "Test failed at 3 case."
-  else
-
-  print("Test of dates_in_months passed.");
-
-
-fun get_nth_test() =
-  if get_nth([1, 2, 3], 1) <> 1
-  then raise Fail "Test failed at 1 case."
-  else 
-
-  if get_nth([1, 2, 3], 2) <> 2
-  then raise Fail "Test failed at 2 case."
-  else
-
-  print("Test of get_nth passed.");
-
-
-fun date_to_string_test() =
-  if date_to_string((1, 1, 1)) <> "January 1, 1"
-  then raise Fail "Test failed at 1 case."
-  else 
-
-  if date_to_string((2, 2, 2)) <> "February 2, 2"
-  then raise Fail "Test failed at 2 case."
-  else
-
-  print("Test of date_to_string passed.");
-
-
-fun number_before_reaching_sum_test() =
-  if number_before_reaching_sum([1, 2, 3], 1) <> 0
-  then raise Fail "Test failed at 1 case."
-  else 
-
-  if number_before_reaching_sum([1, 2, 3], 2) <> 1
-  then raise Fail "Test failed at 2 case."
-  else
-
-  if number_before_reaching_sum([1, 2, 3], 3) <> 1
-  then raise Fail "Test failed at 3 case."
-  else
-
-  if number_before_reaching_sum([1, 2, 3], 4) <> 2
-  then raise Fail "Test failed at 4 case."
-  else
-
-  print("Test of number_before_reaching_sum passed.");
-
-
 fun what_month_test() =
   if what_month(1) <> 1
   then raise Fail "Test failed at 1 case."
@@ -325,6 +279,20 @@ fun what_month_test() =
 
   print("Test of what_month passed.");
 
+
+(* Helper *)
+fun numbers_range(min: int, max: int) =
+  if min <= max
+  then min :: numbers_range(min + 1, max)
+  else [];
+
+fun months_range(a: int, b: int) =
+  if a > b
+  then []
+  else numbers_range(
+    what_month(a),
+    what_month(b)
+  );
 
 fun months_range_test() =
   if months_range(2, 1) <> []
@@ -358,6 +326,25 @@ fun months_range_test() =
 
   print("Test of months_range passed.");
 
+
+(* Helper *)
+fun oldest_search(dates: date list, oldest_date: date) =
+  if null dates 
+  then oldest_date
+  else
+
+  if is_older(oldest_date, hd dates)
+  then oldest_search(tl dates, oldest_date)
+  else oldest_search(tl dates, hd dates)
+
+fun oldest(dates: date list) =
+  if null dates
+  then NONE
+  else
+
+  SOME(
+    oldest_search(tl dates, hd dates)
+  )
 
 fun oldest_test() =
   if oldest([(1, 1, 1), (1, 2, 1)]) <> SOME((1, 1, 1))
