@@ -2,21 +2,21 @@ type date = int * int * int;
 
 
 
+fun is_older(a: date, b: date) =
+  if (#1 a < #1 b)
+  then true
+  else 
 
-fun is_older(a: date, b: date) = 
-  if (#1 b) > (#1 a)
+  if (#1 a = #1 b andalso #2 a < #2 b)
   then true
-  else
+  else 
 
-  if  (#2 b) > (#2 a)
+  if (#1 a = #1 b andalso #2 a = #2 b andalso #3 a < #3 b)
   then true
-  else
-  
-  if (#3 b) > (#3 a)
-  then true
-  else
-  
+  else 
+
   false;
+
 
 fun is_older_test() =
   if is_older((1, 1, 1), (2, 1, 1)) <> true
